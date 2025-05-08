@@ -1,14 +1,22 @@
 \section{Methodology}
 \label{sec:methodology}
 
-% Introduce the overall 4-phase pipeline. Maybe a figure illustrating the flow?
+Methodology
+Our proposed hybrid predictive maintenance framework is structured into a four-phase pipeline, each addressing a specific aspect of system health modeling and prediction. The approach is designed to capture degradation more realistically and support informed decision-making. Figure~\ref{fig:pipeline} provides an overview of the methodology.
 
-% --- Optional: Figure Placeholder ---
-% \begin{figure*}[t]
-%   \centering
-%   \includegraphics[width=\linewidth]{figures/pipeline_diagram.pdf} % Replace with your pipeline figure
-%   \caption{The proposed four-phase hybrid predictive maintenance pipeline.}
-%   \label{fig:pipeline}
+Phase 1: Clustering-Based Label Generation
+The first phase involves deriving degradation labels from raw sensor data using unsupervised learning. Instead of relying on the CMAPSS dataset’s standard RUL-based labels, we apply clustering algorithms such as KMeans and Agglomerative Clustering to time-series sensor data to detect natural groupings that correspond to various stages of degradation. These clusters are manually interpreted and aligned with five intuitive health stages:
+Stage 0 (Normal), Stage 1 (Slightly Degraded), Stage 2 (Moderately Degraded), Stage 3 (Critical), Stage 4 (Failure).
+
+Phase 2: Classification – Current Health Stage Prediction
+Using the custom degradation labels from Phase 1, we train classification models (e.g., Random Forest, SVM, XGBoost) to predict the current degradation stage of a system based on its latest sensor readings. Special care is taken to address class imbalance, as early-stage samples are far more common than late-stage failures.
+
+Phase 3: Regression – Time to Next Stage or Failure
+In parallel, we develop regression models that estimate how many operational cycles remain until the next degradation stage is reached. This is done by labeling each point in the time series with its “time-to-transition” to the next stage, derived from the clustering output. We use models such as Random Forest Regressor, Ridge Regression, and Support Vector Regression for this task.
+
+Phase 4: Risk Score Calculation
+Finally, we introduce a Risk Score, which integrates the outputs of both the classification and regression models. This score reflects both the probability of impending failure and the time remaining until it occurs, offering a quantitative indicator for prioritizing maintenance actions. Various formulations of the risk score are explored, including time-weighted probabilities and urgency-based inversions.
+
 % \end{figure*}
 % ----------------------------------
 

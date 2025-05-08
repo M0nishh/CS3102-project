@@ -1,26 +1,32 @@
 \section{Introduction}
 \label{sec:intro}
+Predictive Maintenance (PdM) is becoming increasingly vital across industries like aerospace, energy, and manufacturing, where unplanned equipment failures can lead to costly downtime, safety hazards, and reduced operational efficiency. The ability to anticipate when a machine is likely to fail—and intervene just in time—offers enormous value. It allows organizations to reduce unnecessary maintenance, extend equipment lifespan, and ensure system reliability, especially in mission-critical environments like aircraft engines or power turbines.
 
-% Motivation: Importance of Predictive Maintenance (PdM) in industries (aerospace, energy, manufacturing).
-% Problem: Limitations of traditional PdM.
-%   - Often binary (failure/no failure), missing gradual degradation.
-%   - Reliance on predefined labels (like standard RUL) might not capture true operational degradation stages.
-%   - Need for more granular insights for optimal maintenance planning.
+However, most traditional PdM systems are built around a limited view of failure prediction. These systems often reduce the complex, continuous process of machine wear-and-tear into a simple binary decision: whether a failure is imminent or not. While helpful in some cases, this binary classification overlooks the reality that machinery typically degrades gradually over time, passing through various intermediate health states before an actual failure occurs. Ignoring these stages means missing opportunities for earlier and more efficient interventions.
+
+Another common limitation is the dependence on predefined labels—such as Remaining Useful Life (RUL)—which may not truly reflect a system’s operational state. These labels can be rigid and fail to adapt to varied real-world scenarios. As a result, there is a pressing need for more granular, interpretable insights that allow engineers to better understand equipment condition and plan maintenance accordingly. This project addresses these gaps with a more nuanced, data-driven approach to predictive maintenance.
+
 \paragraph{The Challenge of Granular Predictive Maintenance.}
-Introduce the context of PdM and its economic/safety significance. Discuss the shortcomings of existing binary or simple RUL prediction models, highlighting the need to understand intermediate degradation states in complex machinery like aircraft engines. Mention the CMAPSS dataset as a standard benchmark.
+The Challenge of Granular Predictive Maintenance
 
-% Proposed Solution: Overview of the hybrid approach.
-%   - Multi-stage failure labeling using clustering on raw sensor data (innovation).
-%   - Combining classification (current stage) and regression (time to next stage/failure).
-%   - Introduction of a Risk Score for decision support.
+In industrial environments where reliability is critical—such as aviation, power generation, and manufacturing—predictive maintenance (PdM) plays a vital role in minimizing downtime, reducing costs, and ensuring safety. A single undetected fault in a jet engine, for example, can lead to catastrophic failure with life-threatening consequences. While PdM technologies have advanced significantly, most existing solutions simplify the problem into binary outcomes (failure vs. no failure) or rely solely on Remaining Useful Life (RUL) predictions. These approaches often fail to capture the gradual and complex degradation behavior that real-world machines experience. In practice, machinery doesn't go from "healthy" to "failed" instantly; it deteriorates through multiple, identifiable stages. Overlooking these intermediate states limits the accuracy of predictions and the effectiveness of maintenance decisions.
+
+To address this, our project proposes a hybrid approach using the CMAPSS dataset—a widely recognized benchmark for PdM research. We move beyond binary labels by first applying clustering techniques to raw sensor data to uncover and define multiple degradation stages. Then, we train classification models to detect the current stage of health and regression models to estimate the time until the next degradation phase or failure. Finally, we combine these outputs into a dynamic Risk Score, providing a more nuanced and actionable tool for maintenance planning.
+
 \paragraph{Our Hybrid Approach.}
-Briefly introduce the core ideas: deriving data-driven degradation stages via clustering, using these stages for both classification and regression tasks, and combining the outputs into a practical Risk Score. Emphasize the novelty of generating custom labels and the hybrid nature of the prediction.
+Our Hybrid Approach
 
-% Contributions: List the key contributions.
-%   - Novel method for generating multi-stage degradation labels from CMAPSS sensor data using clustering.
-%   - Hybrid framework combining classification and regression for stage and time prediction.
-%   - Formulation and application of a Risk Score for maintenance decision-making.
-%   - Comprehensive evaluation on the CMAPSS dataset.
+At the heart of our project lies a hybrid predictive maintenance framework designed to mirror the real-world progression of machinery degradation. Instead of relying on predefined or binary failure labels, we introduce a novel, data-driven method to derive custom degradation stages directly from raw sensor data using unsupervised clustering. These stages—ranging from Normal to Failure—form the foundation for two parallel tasks: classification to determine the current health stage of the system, and regression to estimate the time remaining before transitioning to a more severe state. By capturing both what condition the system is in and how long it is likely to stay there, our approach provides a more complete picture of equipment health. We then integrate these insights into a unified Risk Score, which quantifies the urgency of intervention and supports informed maintenance decisions. This combination of unsupervised labeling, multi-output prediction, and actionable risk estimation distinguishes our work as a flexible and scalable solution for modern PdM challenges.
+
+Key Contributions
+
+A novel method to generate multi-stage degradation labels from CMAPSS sensor data via clustering.
+
+A hybrid prediction framework that combines classification and regression to model stage and time-to-failure.
+
+Development of a Risk Score metric that integrates classification probabilities and regression outputs for practical decision support.
+
+A comprehensive evaluation of the framework on the NASA CMAPSS dataset.
 \paragraph{Contributions.}
 Clearly list the main contributions, aligning with the points above. Use a compact list environment if desired:
 \begin{itemize}
